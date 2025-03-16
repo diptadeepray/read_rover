@@ -7,6 +7,10 @@ android {
     namespace = "com.example.readrover"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding= true
+    }
+
     defaultConfig {
         applicationId = "com.example.readrover"
         minSdk = 24

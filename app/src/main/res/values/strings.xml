@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ReadRover</string>
+
+    <string-array name="dropdown_items">
+        <item>Fiction</item>
+        <item>Non Fiction</item>
+        <item>Fantasy</item>
+    </string-array>
+
+
 </resources>

@@ -22,19 +22,103 @@
         android:layout_gravity="center_horizontal"
         android:padding="10dp"/>
 
+    <!-- Button -->
+    <Button
+        android:id="@+id/addBookButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Book"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"/>
+
+
+
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_weight="1">
+
     <!-- Scrollable Table Layout -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
 
-        <TableLayout
-            android:id="@+id/tableLayout"
+        android:layout_margin="10dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="1">
+            android:orientation="vertical"
+            android:padding="10dp">
 
-        </TableLayout>
+            <GridView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="2"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:isScrollContainer="false"
+                android:scrollbars="none"/>
+        </LinearLayout>
     </ScrollView>
+</LinearLayout>
+
+
+
+
+
+
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_weight="1">
+
+        <!-- Scrollable Table Layout -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <GridView
+                    android:id="@+id/gridView_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numColumns="2"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="10dp"
+                    android:horizontalSpacing="10dp"
+                    android:padding="10dp"
+                    android:layout_margin="10dp"
+                    android:isScrollContainer="false"
+                    android:scrollbars="none"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+
 
 </LinearLayout>

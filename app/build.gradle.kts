@@ -7,9 +7,11 @@ android {
     namespace = "com.example.readrover"
     compileSdk = 35
 
+
     buildFeatures {
         viewBinding= true
     }
+
 
     defaultConfig {
         applicationId = "com.example.readrover"

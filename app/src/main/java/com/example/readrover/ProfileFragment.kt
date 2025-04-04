@@ -61,12 +61,12 @@ class ProfileFragment : Fragment(R.layout.settings_fragment) {
         //And call ImageAdapter to display the images
 
         //Calling the Image Adapter class to show the images and names in the grid view of the list
-        if (imags.isNotEmpty()) {
+   /*     if (imags.isNotEmpty()) {
             //val adapter = ImageAdapter(this, imags)
 
             binding.textViewProfile.text= imags.toString()
 
-        }
+        }*/
 
 
 
@@ -102,10 +102,14 @@ class ProfileFragment : Fragment(R.layout.settings_fragment) {
          */
 
         val images = mutableListOf<String>()
-        val directory = File(requireContext().filesDir, "images") // Change folder name if needed
+        //val directory = File(requireContext().filesDir, "images") // Change folder name if needed
 
-        if (directory.exists()) {
-            val files = directory.listFiles { file -> file.extension == "jpg" || file.extension == "png" }
+        val directory= context?.filesDir
+
+
+
+        if (directory?.exists()==true) {
+            val files = directory?.listFiles { file -> file.extension == "jpg" || file.extension == "png" }
             files?.forEach { file ->
                 val bitmap = BitmapFactory.decodeFile(file.absolutePath)
 

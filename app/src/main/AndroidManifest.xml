@@ -26,7 +26,11 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".UploadNewBook" />
 
+
     </application>
+
+
+
 
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>

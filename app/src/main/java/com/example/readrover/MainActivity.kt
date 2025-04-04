@@ -22,10 +22,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
-import android.widget.Button
+
 import android.widget.TextView
 import com.example.readrover.databinding.ActivityMainBinding
 
+import android.widget.Button
+import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +36,10 @@ class MainActivity : AppCompatActivity() {
     // If we enable binding in the build gradle file.
     // Then for every XML file a binding class is generated.
     // This binding class can be used to access the views in the XML file
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +53,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val button_hm: TextView = findViewById(R.id.button_home)
-        val button_pf: TextView = findViewById(R.id.button_profile)
-        val button_st: TextView = findViewById(R.id.button_settings)
+        val ibutton_hm: ImageView = findViewById(R.id.image_button_home)
+        val ibutton_pf: ImageView = findViewById(R.id.image_button_profile)
+        val ibutton_st: ImageView = findViewById(R.id.image_button_settings)
+
+        val tbutton_hm: TextView = findViewById(R.id.text_button_home)
+        val tbutton_pf: TextView = findViewById(R.id.text_button_profile)
+        val tbutton_st: TextView = findViewById(R.id.text_button_settings)
 
 
 
@@ -65,7 +75,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.buttonHome.setOnClickListener {
+        binding.imageButtonHome.setOnClickListener {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container_view, HomeFragment())
+            transaction.commit()
+        }
+
+        binding.textButtonHome.setOnClickListener {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container_view, HomeFragment())
             transaction.commit()
@@ -81,7 +97,16 @@ class MainActivity : AppCompatActivity() {
          }*/
 
 
-        button_pf.setOnClickListener {
+        ibutton_pf.setOnClickListener {
+            val fragment = ProfileFragment()
+            val fragmentManager: FragmentManager = supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_container_view, fragment)
+            fragmentTransaction.addToBackStack(null) // Add to backstack for navigation
+            fragmentTransaction.commit()
+        }
+
+        tbutton_pf.setOnClickListener {
             val fragment = ProfileFragment()
             val fragmentManager: FragmentManager = supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -92,7 +117,16 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        button_st.setOnClickListener {
+        ibutton_st.setOnClickListener {
+            val fragment = SettingsFragment()
+            val fragmentManager: FragmentManager = supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_container_view, fragment)
+            fragmentTransaction.addToBackStack(null) // Add to backstack for navigation
+            fragmentTransaction.commit()
+        }
+
+        tbutton_st.setOnClickListener {
             val fragment = SettingsFragment()
             val fragmentManager: FragmentManager = supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()

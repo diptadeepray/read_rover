@@ -18,62 +18,104 @@
         android:layout_above="@+id/bottom_buttons"
         />
 
-
-
-
-
-
-
-
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
         android:id="@+id/bottom_buttons"
-
-
         android:layout_alignParentBottom="true">
 
-        <Button
-            android:id="@+id/button_home"
-            android:backgroundTint="@android:color/transparent"
-            android:textColor="@android:color/black"
-            android:layout_height="wrap_content"
-
-            android:text="Home"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:padding="0dp"
-            android:scaleType="fitCenter"
-            />
-
-        <Button
-            android:id="@+id/button_profile"
-            android:backgroundTint="@android:color/transparent"
-            android:textColor="@android:color/black"
             android:layout_height="wrap_content"
-            android:text="Profile"
+            android:orientation="vertical"
+            android:gravity="center">
 
+            <ImageButton
+                android:id="@+id/image_button_home"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_home" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:id="@+id/text_button_home"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:padding="0dp"
-            android:scaleType="fitCenter"/>
-
-        <Button
-            android:id="@+id/button_settings"
-            android:backgroundTint="@android:color/transparent"
-            android:textColor="@android:color/black"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
 
-            android:text="Settings"
+            <ImageButton
+                android:id="@+id/image_button_profile"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/user" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_button_profile"
+                android:text="Profile"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:padding="0dp"
-            android:scaleType="fitCenter"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/image_button_settings"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/settings" />
+
+            <TextView
+                android:id="@+id/text_button_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
 
 
 

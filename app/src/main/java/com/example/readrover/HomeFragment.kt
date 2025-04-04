@@ -11,6 +11,7 @@
 
 
 package com.example.readrover
+
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -24,6 +25,9 @@ import android.view.LayoutInflater
 import com.example.readrover.databinding.HomeFragmentBinding
 
 
+
+
+
 class HomeFragment : Fragment(R.layout.settings_fragment) {
 
     private lateinit var binding: HomeFragmentBinding
@@ -33,8 +37,8 @@ class HomeFragment : Fragment(R.layout.settings_fragment) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = HomeFragmentBinding.inflate(inflater, container, false)
 
+        binding = HomeFragmentBinding.inflate(inflater, container, false)
 
 
 
@@ -50,7 +54,7 @@ class HomeFragment : Fragment(R.layout.settings_fragment) {
         // Loading images from drawable folder...
 
         val fields = R.drawable::class.java.declaredFields
-/*The reason we use R.drawable::class.java.declaredFields is that,
+        /*The reason we use R.drawable::class.java.declaredFields is that,
 in Kotlin, R.drawable is actually generated as a Java class under the hood.*/
 
         val imags = mutableListOf<ImageItem>()
@@ -60,12 +64,17 @@ in Kotlin, R.drawable is actually generated as a Java class under the hood.*/
         //Creates a list which has images and the names that will be displayed
         for (field in fields) {
             try {
-                val resourceId = field.getInt(null)
-                // resourceId is a number which is used to identify the image
 
-                imags.add(ImageItem(imageResId =resourceId, imageName = field.name))
-                //We are specifying the arguments because the ImageItem has 3 parameters but we are passing only 2
-            } catch (e: Exception) {
+                if (field.name.startsWith("book")) {
+
+                    val resourceId = field.getInt(null)
+                    // resourceId is a number which is used to identify the image
+
+                    imags.add(ImageItem(imageResId = resourceId, imageName = field.name))
+                    //We are specifying the arguments because the ImageItem has 3 parameters but we are passing only 2
+                }}
+
+            catch (e: Exception) {
                 e.printStackTrace()
             }
         }
@@ -84,9 +93,53 @@ in Kotlin, R.drawable is actually generated as a Java class under the hood.*/
 
 
 
-        // Load images from internal storage to the same list
-        imags.addAll( loadImagesFromInternalStorage())
+
+
+
+
+
+
+
+
+
+
+
+        // Loading images from private internal storage...
+
+        //val images = mutableListOf<ImageItem>()
+        // Creating a list of Bitmap and String Instead of just Bitmap
+
+        //val directory = File(requireContext().filesDir)
+        val directory = context?.filesDir
+        //val directory = File(this.filesDir)
+        //val directory = File(context?.filesDir ,"images")
+
+        if (directory?.exists()==true) {
+            val files =
+                directory.listFiles { file -> file.extension == "jpg" || file.extension == "png"   }
+            files?.forEach { file ->
+                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+
+                //We are specifying the arguments because the ImageItem has 3 parameters but we are passing only 2
+                imags.add(ImageItem(imageBitmap = bitmap, imageName = file.name))
+            }
+        }
+        else
+        {
+            println("Nothing")
+        }
         //And call ImageAdapter to display the images
+
+
+
+
+
+
+
+
+
+
+
 
         //Calling the Image Adapter class to show the images and names in the grid view of the list
         if (imags.isNotEmpty()) {
@@ -104,12 +157,23 @@ in Kotlin, R.drawable is actually generated as a Java class under the hood.*/
 
 
 
+
+
+
+
         binding.addBookButton.setOnClickListener {
-            val intent=Intent(activity,UploadNewBook::class.java)
+            val intent = Intent(activity, UploadNewBook::class.java)
             startActivity(intent)
             // Doesnot end the activity so if user has mistakenly clicked on Regisreation,
             // he/she can click back and come to the login page.
         }
+
+
+
+
+
+
+
 
 
 
@@ -134,29 +198,11 @@ in Kotlin, R.drawable is actually generated as a Java class under the hood.*/
         }?.toList() ?: emptyList()
     }*/
 
-    private fun loadImagesFromInternalStorage(): List<ImageItem> {
+    //private fun loadImagesFromInternalStorage(){
+// Will return Bitmap and String Instead of just Bitmap
 
         /* MutableList of ImageItem data type is created. The mutableList is named images.
         In the mutable list, items are added one by one.
          */
-
-        val images = mutableListOf<ImageItem>()
-        val directory = File(requireContext().filesDir, "images") // Change folder name if needed
-
-        if (directory.exists()) {
-            val files = directory.listFiles { file -> file.extension == "jpg" || file.extension == "png" }
-            files?.forEach { file ->
-                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-
-                //We are specifying the arguments because the ImageItem has 3 parameters but we are passing only 2
-                images.add(ImageItem(imageBitmap = bitmap, imageName = file.name))
-            }
-        }
-        return images
-    }
-
-
-
-
-
+    //}
 }

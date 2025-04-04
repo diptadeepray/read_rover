@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_margin="10dp"
+
         android:layout_weight="1">
 
     <!-- Scrollable Table Layout -->
@@ -49,7 +49,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
 
-        android:layout_margin="10dp">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,48 +75,6 @@
 
 
 
-
-
-
-
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:layout_weight="1">
-
-        <!-- Scrollable Table Layout -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-
-            android:layout_margin="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <GridView
-                    android:id="@+id/gridView_normal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:numColumns="2"
-                    android:stretchMode="columnWidth"
-                    android:verticalSpacing="10dp"
-                    android:horizontalSpacing="10dp"
-                    android:padding="10dp"
-                    android:layout_margin="10dp"
-                    android:isScrollContainer="false"
-                    android:scrollbars="none"/>
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
 
 
 

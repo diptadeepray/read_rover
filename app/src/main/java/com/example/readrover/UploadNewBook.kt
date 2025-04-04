@@ -129,21 +129,24 @@ class UploadNewBook : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            //finish()  // Close UploadNewBook so user can't go back
+            finish()  // Close UploadNewBook so user can't go back
 
         }
 
 
         btnUpload.setOnClickListener {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                // Lets users select a file (image) while giving access permission to the app.
+
                 type = "image/*"
+                // Ensures that only images are shown in the file picker.
+
                 addCategory(Intent.CATEGORY_OPENABLE)
+                // Ensures the user selects a file that can be opened.
             }
+
             startActivityForResult(intent, PICK_IMAGE_REQUEST)
-
-
-
-
+            // What Happens When startActivityForResult(intent, PICK_IMAGE_REQUEST) is Called?
         }
     }
 
@@ -156,11 +159,19 @@ class UploadNewBook : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         Toast.makeText(this, "Activity ends", Toast.LENGTH_SHORT).show()
 
+
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK)
         {
             data?.data?.let { uri ->
+                /*When the user selects an image from the gallery, Android does not give the actual file path.
+                  Instead, it provides a content URI (Uniform Resource Identifier),
+                  which acts as a reference to the image stored in the gallery or any other app.*/
+
+
+
+
                 val fileName = imgName.text.toString()
                 if (fileName.isNotBlank()) {
 
@@ -180,16 +191,40 @@ class UploadNewBook : AppCompatActivity() {
 
 
 
-    private fun saveImageToInternalStorage(uri: Uri, fileName: String) {
+    private fun saveImageToInternalStorage(uri: Uri, fileName: String):File {
+
         val inputStream: InputStream? = contentResolver.openInputStream(uri)
-        inputStream?.use { input ->
-            val outputStream: FileOutputStream = openFileOutput(fileName, MODE_PRIVATE)
-            outputStream.use { output ->
-                input.copyTo(output)
-            }
-        }
+        //Opens an input stream to read the selected image byte by byte from the URI..
+        //The Uri represents the image selected from the gallery.
+        //This method returns null if the image cannot be opened.
+
+        //Suppose the user selects an image from the gallery.
+        //The input stream will read data from this URI.
+        //Uri: content://media/external/images/media/100
+
+        val file = File(filesDir, "${fileName}.jpg")
+        //.jpeg was not given previously, only fileName was passesd
+        //And the image was not getting saved as an image
+        //So when we were searching for images-to display names/display images itself-no images were found
+
+        //val file = File(filesDir, "image_${System.currentTimeMillis()}.jpg")  // Creates a unique filename
+        //Creates a new file inside the app’s internal storage directory (/data/data/<package_name>/files/).
+        //filesDir is the internal storage directory of your app (/data/data/com.yourappname/files/).
+        //This data cannot be accessed by other apps.
+        //${System.currentTimeMillis()} Prevents accidental overwriting of images.
+
+        val outputStream = FileOutputStream(file)
+        //FileOutputStream(file) allows us to directly write to this file.
+
+        inputStream?.copyTo(outputStream)  // Copy image data
+                //Writes the image data from the input stream to the output file.
 
 
+        inputStream?.close()  // Close input stream
+        outputStream.close()  // Close output stream
+
+        return file
+        //returns a File object representing the saved image.
     }
 }
 
@@ -220,16 +255,5 @@ If we do not return the File object, so accessing the saved image later is diffi
 
 
 
-* contentResolver.openInputStream(uri): Opens an input stream to read the selected image.
-* openFileOutput(fileName, MODE_PRIVATE): Creates a new file inside the app’s internal storage directory (/data/data/<package_name>/files/).
-* input.copyTo(output): Writes the image data from the input stream to the output file.
-* .use { ... }: Ensures automatic closing of streams after use.
-
-Where is the Image Saved?
-/data/data/com.yourappname/files/<fileName>
 
  */
-
-
-
-

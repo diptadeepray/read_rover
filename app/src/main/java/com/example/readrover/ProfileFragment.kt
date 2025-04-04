@@ -71,11 +71,7 @@ class ProfileFragment : Fragment(R.layout.settings_fragment) {
 
 
 
-
-
-
-
-
+        val dbHelper = MyDatabaseHelper(requireContext())
 
 
 

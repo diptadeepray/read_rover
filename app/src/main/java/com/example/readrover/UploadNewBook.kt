@@ -48,6 +48,9 @@ class UploadNewBook : AppCompatActivity() {
         private const val PICK_IMAGE_REQUEST = 1
     }
 
+    private lateinit var db: MyDatabaseHelper
+    // For working with database
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +59,28 @@ class UploadNewBook : AppCompatActivity() {
 
 
 
-        //gridView = findViewById(R.id.gridView)
+
+
+
+
 
         imgName = findViewById(R.id.book_title)
+
+        val bookAuthor = findViewById<EditText>(R.id.book_author)
+        val bookDescription = findViewById<EditText>(R.id.book_description)
+        var bookGenreName: String = null.toString()
+
         this.photoImageView = findViewById(R.id.newBook_imageView)
+
         btnUpload = findViewById(R.id.buttonSelectImage)
         btnSubmit = findViewById(R.id.buttonAddBook)
+
+
+
+
+
+
+
 
 
 
@@ -71,6 +90,9 @@ class UploadNewBook : AppCompatActivity() {
         val savedPaths = sharedPrefs.getStringSet("images", emptySet()) ?: emptySet()
         imageList.clear()
         imageList.addAll(savedPaths)
+
+
+
 
 
 
@@ -87,17 +109,6 @@ class UploadNewBook : AppCompatActivity() {
             spinner.adapter = adapter
         }
 
-
-
-
-
-
-
-
-
-
-
-
         // Handle item selection
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -106,13 +117,10 @@ class UploadNewBook : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
-                Toast.makeText(
-                    this@UploadNewBook,
-                    "Selected: $selectedItem",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                val selectedItem :String= parent?.getItemAtPosition(position).toString()
+                bookGenreName=selectedItem
+
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -125,11 +133,29 @@ class UploadNewBook : AppCompatActivity() {
 
 
 
-        btnSubmit.setOnClickListener {
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()  // Close UploadNewBook so user can't go back
+
+        db = MyDatabaseHelper(this)
+
+        btnSubmit.setOnClickListener {
+            var bookTitleName=imgName.text.toString()
+            var bookAuthorName=bookAuthor.text.toString()
+            var bookDescriptionName=bookDescription.text.toString()
+
+            if (bookTitleName.isNotEmpty() && bookAuthorName.isNotEmpty() && bookDescriptionName.isNotEmpty()&& bookGenreName.isNotEmpty()) {
+                val success = db.insertData(bookTitleName, bookAuthorName, bookDescriptionName, bookGenreName)
+                Toast.makeText(this, if (success) "Saved $bookTitleName $bookAuthor" else "Error", Toast.LENGTH_SHORT).show()
+                imgName.text.clear()
+                bookAuthor.text.clear()
+                bookDescription.text.clear()
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()  // Close UploadNewBook so user can't go back
+            } else {
+                Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show()
+            }
+
 
         }
 
@@ -157,7 +183,7 @@ class UploadNewBook : AppCompatActivity() {
 
     //this function is called after the uploading is done
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Toast.makeText(this, "Activity ends", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "Activity ends", Toast.LENGTH_SHORT).show()
 
 
         super.onActivityResult(requestCode, resultCode, data)
@@ -181,6 +207,10 @@ class UploadNewBook : AppCompatActivity() {
                     photoImageView.setImageURI(uri)
                     //Displaying the image in the image view of the activity
                                            }
+                else{
+                    Toast.makeText(this, "Image not Saved because book title is not given", Toast.LENGTH_LONG).show()
+                }
+
                             }
 
         }
@@ -222,6 +252,8 @@ class UploadNewBook : AppCompatActivity() {
 
         inputStream?.close()  // Close input stream
         outputStream.close()  // Close output stream
+
+        Toast.makeText(this, "Image Saved in Internal Strorage with name ${fileName}.jpg", Toast.LENGTH_LONG).show()
 
         return file
         //returns a File object representing the saved image.

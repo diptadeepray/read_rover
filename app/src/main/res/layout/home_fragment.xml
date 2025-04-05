@@ -6,21 +6,7 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <!-- Search Bar -->
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:queryHint="Search..." />
 
-    <!-- Button -->
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"/>
 
     <!-- Button -->
     <Button

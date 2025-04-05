@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.readrover.DataHolder.display_username
 
 import com.example.readrover.databinding.ProfileFragmentBinding
 import java.io.File
@@ -72,7 +73,7 @@ class ProfileFragment : Fragment(R.layout.settings_fragment) {
 
 
         val dbHelper = MyDatabaseHelper(requireContext())
-
+        binding.displayName.text= "Hello " +display_username +"!"
 
 
 
@@ -93,14 +94,44 @@ class ProfileFragment : Fragment(R.layout.settings_fragment) {
 
     private fun loadImagesFromInternalStorage(): List<String> {
 
+
+        val imags = mutableListOf<String>()
+
+        // Loading images from private internal storage...
+
+        //val images = mutableListOf<ImageItem>()
+        // Creating a list of Bitmap and String Instead of just Bitmap
+
+        //val directory = File(requireContext().filesDir)
+        val directory = context?.filesDir
+        //val directory = File(this.filesDir)
+        //val directory = File(context?.filesDir ,"images")
+
+        if (directory?.exists()==true) {
+            val files =
+                directory.listFiles { file -> file.extension == "jpg" || file.extension == "png"   }
+            files?.forEach { file ->
+                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+
+                //We are specifying the arguments because the ImageItem has 3 parameters but we are passing only 2
+                imags.add(file.name)
+            }
+        }
+        else
+        {
+            println("Nothing")
+        }
+
+
+
+
+
         /* MutableList of ImageItem data type is created. The mutableList is named images.
         In the mutable list, items are added one by one.
          */
 
         val images = mutableListOf<String>()
-        //val directory = File(requireContext().filesDir, "images") // Change folder name if needed
 
-        val directory= context?.filesDir
 
 
 

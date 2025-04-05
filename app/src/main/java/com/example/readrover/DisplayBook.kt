@@ -6,10 +6,23 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 class DisplayBook : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+        // Apply theme before calling super and loading UI
+        val sharedPref = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+        val isDark = sharedPref.getBoolean("isDarkMode", false)
+
+        if (isDark) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_book)
 

@@ -33,6 +33,8 @@ class LoginActivity : AppCompatActivity() {
 
             if (sharedPref.getString(username, "No Data Found")==password) {  // Replace with real validation
                 val intent = Intent(this, MainActivity::class.java)
+
+                DataHolder.display_username=username
                 startActivity(intent)
                 finish()  // Close LoginActivity so user can't go back
             } else {

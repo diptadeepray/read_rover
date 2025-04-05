@@ -21,6 +21,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 
 import com.example.readrover.databinding.ActivityRegistrationBinding
@@ -31,6 +32,10 @@ class RegistrationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
+
         setContentView(R.layout.activity_registration)
 
 
@@ -71,6 +76,8 @@ class RegistrationActivity : AppCompatActivity() {
                     editor.apply() // Save changes
 
                     Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
+
+                    DataHolder.display_username=username
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)

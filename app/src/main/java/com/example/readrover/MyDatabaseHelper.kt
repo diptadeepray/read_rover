@@ -31,21 +31,6 @@ class MyDatabaseHelper(context: Context) :
         return result != -1L
     }
 
-    fun getAllData(): String {
-        val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM users", null)
-        val buffer = StringBuffer()
-        while (cursor.moveToNext()) {
-            buffer.append("ID: ${cursor.getInt(0)}\n")
-            buffer.append("Title: ${cursor.getString(1)}\n")
-            buffer.append("Author: ${cursor.getString(2)}\n")
-            buffer.append("Description: ${cursor.getString(3)}\n")
-            buffer.append("Genre: ${cursor.getString(4)}\n\n")
-        }
-        cursor.close()
-        return buffer.toString()
-    }
-
     fun userByTitle(book_title : String): Pair<Boolean, Triple<String,String,String>?> {
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM users WHERE book_title = ?", arrayOf(book_title))
@@ -68,6 +53,23 @@ class MyDatabaseHelper(context: Context) :
         db.close()
         return Pair(false, null)
     }
+
+    fun getAllData(): String {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM users", null)
+        val buffer = StringBuffer()
+        while (cursor.moveToNext()) {
+            buffer.append("ID: ${cursor.getInt(0)}\n")
+            buffer.append("Title: ${cursor.getString(1)}\n")
+            buffer.append("Author: ${cursor.getString(2)}\n")
+            buffer.append("Description: ${cursor.getString(3)}\n")
+            buffer.append("Genre: ${cursor.getString(4)}\n\n")
+        }
+        cursor.close()
+        return buffer.toString()
+    }
+
+
 
 
 

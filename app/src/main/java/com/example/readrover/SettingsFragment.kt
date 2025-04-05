@@ -54,7 +54,6 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
-
         binding = SettingsFragmentBinding.inflate(inflater, container, false)
 
         binding.themeSwitch.isChecked = isDark
@@ -68,15 +67,9 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
-
             requireActivity().recreate()
-
-            //binding.themeSwitch.isChecked=
-
         }
         return binding.root
-
-
     }
 }
 

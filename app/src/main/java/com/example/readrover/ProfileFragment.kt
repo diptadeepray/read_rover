@@ -35,49 +35,8 @@ class ProfileFragment : Fragment(R.layout.settings_fragment) {
     ): View? {
         binding = ProfileFragmentBinding.inflate(inflater, container, false)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        val imags = mutableListOf<String>()
-
-
-
-        // Load images from internal storage to the same list
-        imags.addAll( loadImagesFromInternalStorage())
-        //And call ImageAdapter to display the images
-
-        //Calling the Image Adapter class to show the images and names in the grid view of the list
-   /*     if (imags.isNotEmpty()) {
-            //val adapter = ImageAdapter(this, imags)
-
-            binding.textViewProfile.text= imags.toString()
-
-        }*/
-
-
-
-
         val dbHelper = MyDatabaseHelper(requireContext())
         binding.displayName.text= "Hello " +display_username +"!"
-
-
-
-
 
         return binding.root
     }
